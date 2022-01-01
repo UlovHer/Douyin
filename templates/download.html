@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>下载</title>
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/static/apple-touch-icon.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="/static/style.css" rel="stylesheet">
+    <style>
+        a, a:hover, button, button:hover {
+            text-decoration-line: none;
+            -webkit-transition: all .5s;
+            transition: all .5s;
+        }
+
+        a {
+            color: #68a7eb;
+        }
+
+        .loading {
+            position: absolute;
+            top: 285px;
+            left: 0;
+            width: 100%;
+            display: none;
+            z-index: 1;
+        }
+
+        .loading img {
+            display: block;
+            width: 3%;
+            margin: 62px auto;
+            border-radius: 20px;
+        }
+
+        h1 span img {
+            width: 30%;
+        }
+    </style>
+    <link href="/static/responsive.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="col-md-12">
+    <div class="contact_form ">
+        <h1 style="text-align: center"><a href="/" target="_self">
+            {#            <span><img src="/static/logo.png" alt=""></span>#}
+            <span>无水印抖音视频预览</span>
+        </a></h1>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <h5 style="text-align: center; color: #67C23A">视频解析成功！</h5>
+                </div>
+            </div>
+            <div class="col-md-offset-1 col-md-10 text-center">
+                <video controls="controls" autoplay="autoplay" width="100%" loop="loop" muted="muted">
+                    <source src="{{video_local_path}}" type="video/mp4">
+                </video>
+            </div>
+            <form method="post">
+                {% csrf_token %}
+                <div class="download-div col-md-offset-1 col-md-10 text-center">
+                    <a id="download-btn" class="sim-btn btn-hover-new btn btn-block"
+                       download="{{ video_url_web }}">下载</a>
+                    {#                    <span id="download-btn2" class="sim-btn btn-hover-new btn btn-block">下载</span>#}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+<script src="https://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="/static/contact.js"></script>
+{#<script>#}
+{#    setTimeout(function () {#}
+{#        $('#download-btn2')[0].click();#}
+{#    }, 300)#}
+{#    let downloadUrlFile = function (url) {#}
+{#        const xhr = new XMLHttpRequest();#}
+{#        xhr.open('GET', url, true);#}
+{#        xhr.responseType = 'blob';#}
+{#        xhr.onload = () => {#}
+{#            if (xhr.status === 200) {#}
+{#                // 获取blob数据并保存#}
+{#                const blob = new Blob([xhr.response], {type: "video/mp4"})#}
+{#                const a = document.createElement("a")#}
+{#                a.href = URL.createObjectURL(blob)#}
+{#                a.download = "{{ video_name }}"#}
+{#                a.click()#}
+{#                URL.revokeObjectURL(a.href)#}
+{#                a.remove();#}
+{#            }#}
+{#        };#}
+{#        xhr.send();#}
+{#    }#}
+{#    $('#download-btn2').click(function () {#}
+{#        downloadUrlFile('{{ video_url_web }}');#}
+{#    })#}
+{#</script>#}
+</html>
